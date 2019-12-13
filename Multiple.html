@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <title>Multiple AR Markers demo</title>
+  <script src="./lib/aframe.min.js"></script>
+  <script src="./lib/aframe-ar.min.js"></script>
+  <style media="screen">
+    *{font-family: "Arial"; box-sizing: border-box;}
+    #arjsDebugUIContainer{
+      display: none;
+    }
+    main{
+      position: fixed;
+      z-index: 101;
+      top:0;
+      right: -100%;
+      width: 25%;
+      height: 100vh;
+      transition: 1s right;
+      background-color: white;
+    }
+    main.show{
+      right: 0;
+    }
+    main.open{
+      right: 0 !important;
+    }
+    main.open #obj-list, main.open #obj-info{
+      display: none;
+      color: #7a7a7a;
+    }
+    main #obj-info{
+      /* background-color: white; */
+      display: none;
+    }
+    main.open #obj-info{display: block;}
+    main #obj-list h1, main #obj-info h1{
+      height: 60px;
+      background-color: #30b655;
+      color: white;
+      box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.5);
+      margin: 0 0 10px 0;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    main #obj-info > p{
+      height: calc(100vh - 60px);
+      margin: 0;
+      margin-top: -10px;
+      overflow-y: auto;
+    }
+    main #obj-list div, main #obj-info p{
+      color: #7a7a7a;
+      padding: 20px;
+      letter-spacing: 0.08em;
+      font-size: 1.1em;
+    }
+    main #obj-info p img{
+      width: 100%;
+    }
+    main #obj-list div:nth-of-type(2n){
+      background-color: #f1f1f1;
+    }
+    main #obj-info button{
+      height: 60px;
+      float: right;
+      font-size: 2em;
+      margin: 0;
+      padding: 10px 20px;
+      border: none;
+      border-bottom: 1px solid #7a7a7a;
+      background-color: white;
+      color: #7a7a7a;
+      box-sizing: border-box;
+    }
+  </style>
+  <style>
+  @media only screen and (max-device-width: 719px){
+    main{width: 50%;}
+  }
+  @media only screen and (max-device-width: 560px){
+  }
+  </style>
+</head>
+<body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
+  <!-- HTML UI HERE -->
+  <main>
+    <div id="obj-list"></div>
+    <div id="obj-info">
+      <button onclick="closeInfo()">X</button>
+      <h1></h1>
+      <p></p>
+    </div>
+  </main>
+  <!-- HTML UI END -->
+	<a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
+		<a-marker type='barcode' value='1'>
+			<a-box position='0 0.5 0' material='opacity: 0.5; side: double;color:red;'>
+				<a-torus-knot radius='0.26' radius-tubular='0.05'
+				animation="property: rotation; to:360 0 0; dur: 5000; easing: linear; loop: true">
+				</a-torus-knot>
+			</a-box>
+		</a-marker>
+
+		<!-- handle barcode markers -->
+    <a-assets>
+      <a-asset-item id="ove-obj" src="./models/obj/Oveja.obj"></a-asset-item>
+      <a-asset-item id="ove-mtl" src="./models/obj/Oveja.mtl"></a-asset-item>
+      <a-asset-item id="oveNegra-obj" src="./models/obj/OvejaNegra.obj"></a-asset-item>
+      <a-asset-item id="oveNegra-mtl" src="./models/obj/OvejaNegra.mtl"></a-asset-item>
+    </a-assets>
+		<a-marker type='barcode' value='0' title='ovejabeja'>
+      <a-entity
+        obj-model="obj: #ove-obj; mtl: #ove-mtl"
+        scale="0.005 0.005 0.005"
+        animation="property: rotation; to:0 360 0; dur: 10000; easing: linear; loop: true">
+      </a-entity>
+		</a-marker>
+		<a-marker type='barcode' value='7' title='ovejabejanegra'>
+      <a-entity
+        obj-model="obj: #oveNegra-obj; mtl: #oveNegra-mtl"
+        scale="0.005 0.005 0.005"
+        animation="property: rotation; to:0 360 0; dur: 10000; easing: linear; loop: true">
+      </a-entity>
+		</a-marker>
+
+		<a-marker type='barcode' value='5'>
+			<a-box position='0 0.5 0' material='opacity: 0.5; side: double;color:green;'>
+				<a-torus-knot radius='0.26' radius-tubular='0.05'
+				animation="property: rotation; to:360 0 0; dur: 5000; easing: linear; loop: true">
+				</a-torus-knot>
+			</a-box>
+		</a-marker>
+
+		<!-- add a simple camera -->
+		<a-entity camera></a-entity>
+	</a-scene>
+  <script src="./ui-functions.js" charset="utf-8"></script>
+</body>
+</html>
