@@ -13,17 +13,17 @@
       position: fixed;
       z-index: 101;
       top:0;
-      left: 100%;
+      right: -100%;
       width: 25%;
       height: 100vh;
-      transition: 1s left;
+      transition: 1s right;
       background-color: white;
     }
     main.show{
-      left: 75%;
+      right: 0;
     }
     main.open{
-      left: 75% !important;
+      right: 0 !important;
     }
     main.open #obj-list, main.open #obj-info{
       display: none;
@@ -40,7 +40,7 @@
       color: white;
       box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.5);
       margin: 0 0 10px 0;
-      padding: 10px 20px;
+      padding: 10px;
       box-sizing: border-box;
     }
     main #obj-info > p{
@@ -73,51 +73,18 @@
       color: #7a7a7a;
       box-sizing: border-box;
     }
-    #smallSearch{display: none;}
   </style>
   <style>
-    @media only screen and (max-device-width: 719px){
-      main{width: 65%;}
-      main.show{
-        left: 100% !important;
-      }
-      main.show.smallOpen{
-        left: 35% !important;
-      }
-      main.show #smallSearch{
-        top: 65px !important;
-        left: -50px;
-        width: 50px;
-        height: 50px;
-        box-sizing: border-box;
-        top: 0;
-        display: block;
-        position: absolute;
-        z-index: 102;
-        border: none;
-        background-color: white;
-        border-radius: 5px 0 0 5px;
-        border: 0 solid black;
-        margin: 0;
-        font-size: large;
-      }
-    }
-    @media only screen and (orientation: portrait){
-      main{width: calc(100% - 50px)}
-      main.show{
-        left: 100% !important;
-      }
-      main.show.smallOpen{
-        left: 50px !important;
-      }
-    }
-    /* @media only screen and (orientation: landscape){} */
+  @media only screen and (max-device-width: 719px){
+    main{width: 50%;}
+  }
+  @media only screen and (max-device-width: 560px){
+  }
   </style>
 </head>
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
   <!-- HTML UI HERE -->
   <main>
-    <button id="smallSearch" onclick="smallOpen()">&#x1F50D;</button>
     <div id="obj-list"></div>
     <div id="obj-info">
       <button onclick="closeInfo()">X</button>
@@ -127,6 +94,14 @@
   </main>
   <!-- HTML UI END -->
 	<a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
+		<a-marker type='barcode' value='1'>
+			<a-box position='0 0.5 0' material='opacity: 0.5; side: double;color:red;'>
+				<a-torus-knot radius='0.26' radius-tubular='0.05'
+				animation="property: rotation; to:360 0 0; dur: 5000; easing: linear; loop: true">
+				</a-torus-knot>
+			</a-box>
+		</a-marker>
+
 		<!-- handle barcode markers -->
     <a-assets>
       <a-asset-item id="ove-obj" src="./models/obj/Oveja.obj"></a-asset-item>
@@ -148,6 +123,15 @@
         animation="property: rotation; to:0 360 0; dur: 10000; easing: linear; loop: true">
       </a-entity>
 		</a-marker>
+
+		<a-marker type='barcode' value='5'>
+			<a-box position='0 0.5 0' material='opacity: 0.5; side: double;color:green;'>
+				<a-torus-knot radius='0.26' radius-tubular='0.05'
+				animation="property: rotation; to:360 0 0; dur: 5000; easing: linear; loop: true">
+				</a-torus-knot>
+			</a-box>
+		</a-marker>
+
 		<!-- add a simple camera -->
 		<a-entity camera></a-entity>
 	</a-scene>
