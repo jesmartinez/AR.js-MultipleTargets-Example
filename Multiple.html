@@ -4,9 +4,11 @@
   <title>Multiple AR Markers demo</title>
   <script src="./lib/aframe.min.js"></script>
   <script src="./lib/aframe-ar.min.js"></script>
+  <script src="./lib/inflate.min.js"></script>
+  <script src="./lib/aframe-extras.loaders.min.js"></script>
   <style media="screen">
     *{font-family: "Arial"; box-sizing: border-box;}
-    #arjsDebugUIContainer{
+    #arjsDebugUIContainer, .a-enter-vr{
       display: none;
     }
     main{
@@ -128,26 +130,52 @@
   <!-- HTML UI END -->
 	<a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
 		<!-- handle barcode markers -->
-    <a-assets>
-      <a-asset-item id="ove-obj" src="./models/obj/Oveja.obj"></a-asset-item>
-      <a-asset-item id="ove-mtl" src="./models/obj/Oveja.mtl"></a-asset-item>
-      <a-asset-item id="oveNegra-obj" src="./models/obj/OvejaNegra.obj"></a-asset-item>
-      <a-asset-item id="oveNegra-mtl" src="./models/obj/OvejaNegra.mtl"></a-asset-item>
-    </a-assets>
-		<a-marker type='barcode' value='0' title='ovejabeja'>
+    <!-- <a-assets>
+      <a-asset-item  id="tree" src="./models/fbx/Vegetation_Tree_Apple_02.fbx"></a-asset-item>
+    </a-assets> -->
+		<a-marker type='barcode' value='0' title='cactus'>
       <a-entity
-        obj-model="obj: #ove-obj; mtl: #ove-mtl"
-        scale="0.005 0.005 0.005"
-        animation="property: rotation; to:0 360 0; dur: 10000; easing: linear; loop: true">
+          fbx-model="src: url(./models/fbx/Vegetation_Cactus_15.fbx);"
+          scale="0.02 0.02 0.02"
+          animation="property: rotation; to:0 360 0; dur: 10000; easing: linear; loop: true">
       </a-entity>
 		</a-marker>
-		<a-marker type='barcode' value='7' title='ovejabejanegra'>
+		<a-marker type='barcode' value='1' title='tulip'>
       <a-entity
-        obj-model="obj: #oveNegra-obj; mtl: #oveNegra-mtl"
-        scale="0.005 0.005 0.005"
-        animation="property: rotation; to:0 360 0; dur: 10000; easing: linear; loop: true">
+          fbx-model="src: url(./models/fbx/Vegetation_Flower_Tulip_02.fbx);"
+          scale="0.05 0.05 0.05"
+          animation="property: rotation; to:0 360 0; dur: 10000; easing: linear; loop: true">
       </a-entity>
 		</a-marker>
+		<a-marker type='barcode' value='2' title='mushroom'>
+      <a-entity
+          fbx-model="src: url(./models/fbx/Vegetation_Mushroom_Red_05.fbx);"
+          scale="0.05 0.05 0.05"
+          animation="property: rotation; to:0 360 0; dur: 10000; easing: linear; loop: true">
+      </a-entity>
+		</a-marker>
+		<a-marker type='barcode' value='3' title='afrodita'>
+      <a-entity
+          fbx-model="src: url(./models/fbx/Prop_Statue_Aphrodite_01.fbx);"
+          scale="0.01 0.01 0.01"
+          animation="property: rotation; to:0 360 0; dur: 10000; easing: linear; loop: true">
+      </a-entity>
+		</a-marker>
+		<a-marker type='barcode' value='4' title='banana'>
+      <a-entity
+          fbx-model="src: url(./models/fbx/Prop_Fruit_Banana_01.fbx);"
+          scale="0.05 0.05 0.05"
+          animation="property: rotation; to:0 360 0; dur: 10000; easing: linear; loop: true">
+      </a-entity>
+		</a-marker>
+		<a-marker type='barcode' value='5' title='apple'>
+      <a-entity
+          fbx-model="src: url(./models/fbx/Vegetation_Tree_Apple_02.fbx);"
+          scale="0.01 0.01 0.01"
+          animation="property: rotation; to:0 360 0; dur: 10000; easing: linear; loop: true">
+      </a-entity>
+		</a-marker>
+
 		<!-- add a simple camera -->
 		<a-entity camera></a-entity>
 	</a-scene>
